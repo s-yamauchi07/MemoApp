@@ -3,6 +3,11 @@ import Header from '../../components/Header'
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
+import { router } from 'expo-router'
+
+const handlePress = (): void => {
+  router.push('/memo/create')
+}
 
 const List = (): React.JSX.Element => {
   return (
@@ -16,7 +21,8 @@ const List = (): React.JSX.Element => {
         <MemoListItem />
       </View>
       {/* アイコン */}
-      <CircleButton>
+      
+      <CircleButton onPress={handlePress}>
         <Icon name="plus" size={40} color="#fff"/>
       </CircleButton>
     </View>
