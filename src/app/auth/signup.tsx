@@ -3,18 +3,18 @@ import Header from '../../components/Header'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 
-const Login = (): React.JSX.Element => {
+const SignUp = (): React.JSX.Element => {
   return(
     <View style={styles.container}>
       <Header />
       <View style={styles.inner}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>SignUp</Text>
         <Input inputValue="Email address" />
         <Input inputValue="Password" />
         <Button label="Submit"/>
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Not registered?</Text>
-          <Text style={styles.footerLink}>Sign up here!</Text>
+          <Text style={styles.footerText}>Already registered?</Text>
+          <Text style={styles.footerLink}>Log in</Text>
         </View>
       </View>
     </View>
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Login
+export default SignUp
