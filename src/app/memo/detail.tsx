@@ -1,5 +1,4 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import Header from '../../components/Header'
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 
@@ -13,7 +12,6 @@ const handlePress = (): void => {
 const Detail = (): React.JSX.Element => {
   return(
     <View style={styles.container}>
-      <Header />
       <View style={styles.memoHeader}>
         <Text style={styles.memoTitle}>買い物リスト</Text>
         <Text style={styles.memoDate}>2025年8月1日 10:00</Text>
@@ -28,7 +26,7 @@ const Detail = (): React.JSX.Element => {
       </ScrollView>
 
       <CircleButton 
-        style={{ top: 160, bottom: 'auto' }}
+        style={{ top: 60, bottom: 'auto' }}
         onPress={handlePress}
       >
         <Icon name="pencil" size={40} color="#fff" />

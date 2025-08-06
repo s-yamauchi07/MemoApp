@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import Header from '../../components/Header'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 
@@ -13,7 +12,6 @@ const handlePress = (): void => {
 const Login = (): React.JSX.Element => {
   return(
     <View style={styles.container}>
-      <Header />
       <View style={styles.inner}>
         <Text style={styles.title}>Login</Text>
         <Input inputValue="Email address" />
