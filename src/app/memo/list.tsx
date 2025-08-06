@@ -2,22 +2,30 @@ import { View, StyleSheet  } from 'react-native'
 import MemoListItem from '../../components/MemoListItem'
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
-import { router } from 'expo-router'
+import { router, useNavigation } from 'expo-router'
+import { useEffect } from 'react'
+import LogOutButton from '../../components/LogOutButton'
 
 const handlePress = (): void => {
   router.push('/memo/create')
 }
 
 const List = (): React.JSX.Element => {
+  const navigation = useNavigation()
+  // 画面が表示された時初回だけheaderをカスタマイズする
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => { return <LogOutButton /> }
+    })
+  }, [])
+
   return (
     <View style={styles.container}>
-      {/* メモ一覧 */}
       <View>
         <MemoListItem />
         <MemoListItem />
         <MemoListItem />
       </View>
-      {/* アイコン */}
       
       <CircleButton onPress={handlePress}>
         <Icon name="plus" size={40} color="#fff"/>
