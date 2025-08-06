@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+
+import { Link } from 'expo-router'
 
 const Login = (): React.JSX.Element => {
   return(
@@ -14,7 +16,11 @@ const Login = (): React.JSX.Element => {
         <Button label="Submit"/>
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>
-          <Text style={styles.footerLink}>Sign up here!</Text>
+          <Link href="/auth/signup" asChild>
+            <TouchableOpacity>
+              <Text style={styles.footerLink}>Sign up here!</Text>
+            </TouchableOpacity> 
+          </Link>
         </View>
       </View>
     </View>
