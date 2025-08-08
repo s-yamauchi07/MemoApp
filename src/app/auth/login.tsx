@@ -3,6 +3,7 @@ import Button from '../../components/Button'
 import Input from '../../components/Input'
 
 import { Link, router } from 'expo-router'
+import { useState } from 'react'
 
 const handlePress = (): void => {
   // ログイン
@@ -10,12 +11,29 @@ const handlePress = (): void => {
 }
 
 const Login = (): React.JSX.Element => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return(
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Login</Text>
-        <Input inputValue="Email address" />
-        <Input inputValue="Password" />
+        <Input 
+          inputValue={email}
+          onChangeText={(text) => setEmail(text)}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email address"
+          textContentType="emailAddress"
+        />
+        <Input 
+          inputValue={password} 
+          onChangeText={(text) => setPassword(text)}
+          autoCapitalize="none"
+          secureTextEntry
+          placeholder="Password"
+          textContentType="password"
+        />
         <Button label="Submit" onPress={handlePress}/>
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not registered?</Text>

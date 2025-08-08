@@ -1,14 +1,36 @@
-import { TextInput, StyleSheet } from 'react-native'
+import { TextInput, StyleSheet, TextInputProps } from 'react-native'
 
 interface Props {
   inputValue: string
+  onChangeText: (text: string) => void
+  autoCapitalize: TextInputProps['autoCapitalize']
+  keyboardType?: 'email-address' | undefined
+  placeholder? : string
+  secureTextEntry?: boolean
+  textContentType?: 'emailAddress' | 'password'
 }
-
 const Input = (props: Props) => {
-  const { inputValue } = props 
+  const { 
+    inputValue, 
+    onChangeText,
+    autoCapitalize,
+    keyboardType,
+    placeholder,
+    secureTextEntry,
+    textContentType
+  } = props 
 
   return (
-    <TextInput style={styles.input} value={inputValue} />
+    <TextInput 
+      style={styles.input} 
+      value={inputValue} 
+      onChangeText={onChangeText}
+      autoCapitalize={autoCapitalize}
+      keyboardType={keyboardType}
+      placeholder={placeholder}
+      secureTextEntry={secureTextEntry}
+      textContentType={textContentType}
+    />
   )
 }
 
