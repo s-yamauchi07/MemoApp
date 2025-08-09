@@ -2,7 +2,11 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 
-import { router } from 'expo-router'
+import { router, useLocalSearchParams } from 'expo-router'
+import { onSnapshot, doc } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { auth, db } from '../../config'
+import { type Memo } from '../../../types/memo'
 
 const handlePress = (): void => {
   // 編集画面へ遷移`
@@ -10,18 +14,34 @@ const handlePress = (): void => {
 }
  
 const Detail = (): React.JSX.Element => {
+  const [memo, setMemo] = useState<Memo | null>(null)
+  const { id } = useLocalSearchParams()
+  
+  useEffect(() => {
+    if (auth.currentUser === null) return
+
+    const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id as string)
+    const unsubscribe = onSnapshot(ref, (memoDoc) => {
+      const { bodyText, updatedAt } = memoDoc.data() as Memo
+      setMemo({
+        id: memoDoc.id,
+        bodyText,
+        updatedAt
+      })
+    })
+    return unsubscribe()
+  }, [])
+
   return(
     <View style={styles.container}>
       <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle}>買い物リスト</Text>
-        <Text style={styles.memoDate}>2025年8月1日 10:00</Text>
+        <Text style={styles.memoTitle} numberOfLines={1}>{memo?.bodyText}</Text>
+        <Text style={styles.memoDate}>{memo?.updatedAt.toDate().toLocaleString('ja-JP')}</Text>
       </View>
 
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoBodyText}>
-          買い物リスト
-          書体やレイアウトなどを確認するために用います。
-          門分用なので使い方を待ちあえると不自然に見えることもありますので要注意。
+          {memo?.bodyText}
         </Text>
       </ScrollView>
 
@@ -60,10 +80,10 @@ const styles = StyleSheet.create({
     lineHeight: 16
   },
   memoBody: {
-    paddingVertical:32,
     paddingHorizontal: 27
   },
   memoBodyText: {
+    paddingVertical:32,
     fontSize: 16,
     lineHeight: 24,
     color: '#000'
