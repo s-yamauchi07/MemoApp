@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react'
 import { auth, db } from '../../config'
 import { type Memo } from '../../../types/memo'
 
-const handlePress = (): void => {
+const handlePress = (id: string): void => {
   // 編集画面へ遷移`
-  router.push('/memo/edit')
+  router.push({ pathname: '/memo/edit', params: { id }})
 }
  
 const Detail = (): React.JSX.Element => {
@@ -29,8 +29,8 @@ const Detail = (): React.JSX.Element => {
         updatedAt
       })
     })
-    return unsubscribe()
-  }, [])
+    return unsubscribe
+  }, [id])
 
   return(
     <View style={styles.container}>
@@ -47,7 +47,7 @@ const Detail = (): React.JSX.Element => {
 
       <CircleButton 
         style={{ top: 60, bottom: 'auto' }}
-        onPress={handlePress}
+        onPress={() => handlePress(memo.id)}
       >
         <Icon name="pencil" size={40} color="#fff" />
       </CircleButton>
